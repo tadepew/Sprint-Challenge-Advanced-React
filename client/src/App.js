@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { useList } from "./hooks/useList";
 
-function App() {
+export default function App() {
+  const url = "http://localhost:5000/api/players";
+  const [listData] = useList(url);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Women's World Cup Players:</h1>
+      <h2>Name | Country</h2>
+      {listData.map((item, index) => {
+        return (
+          <div key={index}>
+            {item.name} | {item.country}
+          </div>
+        );
+      })}
     </div>
   );
 }
-
-export default App;
